@@ -4,6 +4,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from src.models.settings.connection import db_connection_handler
 from src.models.entities.events import Events
 from src.models.entities.attendees import Attendees
+from src.errors.error_types.http_conflict import HttpConflictError
 
 class EventsRepository:
   def insert_event(self, eventsInfo: Dict) -> Dict:
@@ -22,7 +23,7 @@ class EventsRepository:
         return eventsInfo
 
       except IntegrityError:
-        raise Exception('Evento ja cadastrado!')
+        raise HttpConflictError('Evento ja cadastrado!')
       except Exception as exception:
         database.session.rollback()
         raise exception
@@ -41,7 +42,7 @@ class EventsRepository:
 
       except NoResultFound:
         return None
-      
+
   def count_event_attendees(self, event_id: str) -> Dict:
     with db_connection_handler as database:
       event_count = (
