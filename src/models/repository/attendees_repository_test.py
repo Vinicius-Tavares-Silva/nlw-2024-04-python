@@ -4,10 +4,10 @@ from .attendees_repository import AttendeesRepository
 db_connection_handler.connect_to_db()
 
 def test_insert_attendee():
-  event_id = 'meu-uuid-e-nois2'
+  event_id = 'dc8d0757-f664-463b-8c3b-346bbd0308fa'
 
   attendees_info = {
-    'uuid': 'meu-uuid-attendee',
+    'uuid': 'meu-uuid-attendee3',
     'name': 'meu name',
     'email': 'email@email.com',
     'event_id': event_id
